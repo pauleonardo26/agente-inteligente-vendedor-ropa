@@ -583,7 +583,6 @@ Este diseño representa una aproximación moderna al desarrollo de agentes intel
 
 -------------------------------------------
 
----
 
 # 🛠️ Tecnologías Utilizadas
 
@@ -878,7 +877,144 @@ En la siguiente sección se explica cómo obtener y configurar la API Key necesa
 
 ------------------------------------------
 
+---
 
+# 🔑 Configuración de Google Gemini
+
+Para que el **Agente Inteligente Vendedor de Ropa** pueda comprender las consultas del usuario y generar respuestas en lenguaje natural, es necesario configurar una API Key de Google Gemini.
+
+La API Key permite autenticar la aplicación y establecer una comunicación segura con el modelo de lenguaje.
+
+> **Importante:** Nunca compartas tu API Key ni la publiques en un repositorio público de GitHub.
+
+---
+
+# Obtener una API Key
+
+La API Key puede obtenerse desde **Google AI Studio**.
+
+El proceso general es el siguiente:
+
+1. Iniciar sesión con una cuenta de Google.
+2. Acceder a Google AI Studio.
+3. Crear una nueva API Key.
+4. Copiar la clave generada.
+5. Guardarla en un lugar seguro.
+
+Una vez obtenida, podrá utilizarse para autenticar las solicitudes realizadas al modelo Gemini.
+
+---
+
+# Configuración en Google Colab
+
+Durante el desarrollo de este Challenge, la API Key se configuró utilizando las herramientas disponibles en Google Colab.
+
+La clave se almacenó como un secreto del entorno y posteriormente fue leída desde el notebook para evitar escribirla directamente en el código.
+
+Este método ofrece una mayor seguridad, ya que la clave permanece protegida y no forma parte del repositorio.
+
+---
+
+# Configuración mediante variables de entorno
+
+En proyectos ejecutados de forma local, una práctica habitual consiste en utilizar variables de entorno.
+
+De esta manera, la API Key permanece fuera del código fuente y puede cambiarse sin modificar la aplicación.
+
+Este enfoque mejora la seguridad y facilita la administración de credenciales en diferentes entornos.
+
+---
+
+# Inicialización del modelo
+
+Una vez configurada la API Key, el proyecto crea una instancia del modelo Google Gemini.
+
+A partir de ese momento, el agente puede enviar consultas al modelo de lenguaje y recibir respuestas generadas mediante Inteligencia Artificial.
+
+La inicialización del modelo constituye uno de los primeros pasos del flujo de ejecución del proyecto.
+
+---
+
+# Integración con LangChain
+
+Después de inicializar Gemini, el modelo se integra con LangChain.
+
+Esta integración permite que el agente:
+
+- Comprenda preguntas formuladas en lenguaje natural.
+- Utilice herramientas cuando sea necesario.
+- Razone antes de responder.
+- Genere respuestas claras y coherentes.
+
+LangChain actúa como intermediario entre el modelo de lenguaje y el resto de componentes del sistema.
+
+---
+
+# Flujo de autenticación
+
+El proceso completo puede resumirse mediante el siguiente diagrama:
+
+```text
+Google AI Studio
+        │
+        ▼
+Generación de API Key
+        │
+        ▼
+Almacenamiento seguro
+        │
+        ▼
+Inicialización de Gemini
+        │
+        ▼
+Integración con LangChain
+        │
+        ▼
+Creación del Agente
+        │
+        ▼
+Consultas del Usuario
+```
+
+---
+
+# Buenas prácticas de seguridad
+
+Durante el desarrollo de aplicaciones basadas en Modelos de Lenguaje es recomendable seguir algunas medidas de seguridad:
+
+- No publicar la API Key en GitHub.
+- No escribir la clave directamente dentro del código fuente.
+- Utilizar variables de entorno o sistemas de gestión de secretos.
+- Revocar la clave inmediatamente si se sospecha que ha sido expuesta.
+- Crear nuevas credenciales cuando sea necesario.
+
+Estas prácticas ayudan a proteger el acceso al modelo y evitan el uso no autorizado de la API.
+
+---
+
+# Consideraciones importantes
+
+El funcionamiento del agente depende de una conexión válida con Google Gemini.
+
+Si la API Key no está configurada correctamente o presenta algún problema, el agente no podrá generar respuestas.
+
+Asimismo, es posible que existan límites de uso asociados a la cuenta o al plan disponible en Google AI Studio, por lo que conviene revisar periódicamente la documentación oficial y el consumo de la API.
+
+---
+
+# Resultado esperado
+
+Una vez completada la configuración:
+
+- El modelo Google Gemini quedará correctamente inicializado.
+- LangChain podrá comunicarse con el modelo.
+- El agente estará preparado para interpretar consultas.
+- Las herramientas podrán utilizarse cuando sea necesario.
+- El sistema estará listo para ejecutar conversaciones sobre el inventario de ropa.
+
+La siguiente sección muestra cómo ejecutar el proyecto y presenta ejemplos de interacción con el agente.
+
+-------------------------------------------
 
 
 
