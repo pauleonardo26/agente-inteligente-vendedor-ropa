@@ -1,0 +1,5 @@
+langchain
+langgraph
+pandas
+google-generativeai
+langchain-google-genai
