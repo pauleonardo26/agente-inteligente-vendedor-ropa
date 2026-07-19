@@ -777,7 +777,150 @@ Esta arquitectura ofrece ventajas como:
 
 -----------------------------------------
 
+# 8. Ejecución del Proyecto
+
+## Requisitos previos
+
+Antes de ejecutar el Agente Inteligente Vendedor de Ropa es necesario verificar que el entorno tenga instalados los componentes requeridos:
+
+- Python 3.10 o superior.
+- Dependencias del proyecto instaladas.
+- Variable de entorno con la API Key de Google Gemini configurada.
+- Archivo `inventario.csv` ubicado dentro de la estructura del proyecto.
+
 ---
+
+## Activación del entorno virtual
+
+Se recomienda utilizar un entorno virtual para mantener aisladas las dependencias del proyecto.
+
+### Windows
+
+```bash
+venv\Scripts\activate
+
+Inicio del agente
+
+Una vez configurado el entorno, ejecutar el archivo principal del proyecto:
+
+python agente_ia_challenge.py
+
+Al iniciar correctamente, el agente queda disponible para recibir consultas relacionadas con el inventario de ropa.
+
+Ejemplo de ejecución
+
+Salida inicial del programa:
+
+=========================================
+ Agente Inteligente Vendedor de Ropa
+=========================================
+
+Sistema iniciado correctamente.
+
+Realiza una consulta sobre los productos disponibles.
+Ejemplos de conversación
+Consulta general de productos
+
+Usuario:
+
+¿Qué productos tienes disponibles?
+
+Agente:
+
+Tengo disponibles los siguientes productos:
+
+- Polo niño avenger
+  Categoría: Ropa niño
+  Talla: 4
+  Precio: S/35
+  Stock: 20 unidades
+
+- Polo niño spiderman
+  Categoría: Ropa niño
+  Talla: 6
+  Precio: S/38
+  Stock: 15 unidades
+
+- Conjunto niño deportivo
+  Categoría: Ropa niño
+  Talla: 8
+  Precio: S/65
+  Stock: 10 unidades
+Consulta por talla
+
+Usuario:
+
+¿Tienes ropa para niño talla 10?
+
+Agente:
+
+Sí, encontré un producto disponible:
+
+Producto:
+Casaca niño invierno
+
+Categoría:
+Ropa niño
+
+Talla:
+10
+
+Precio:
+S/75
+
+Stock:
+8 unidades
+Consulta de stock
+
+Usuario:
+
+¿Cuántas unidades quedan del pantalón jean niño?
+
+Agente:
+
+El producto encontrado es:
+
+Producto:
+Pantalón niño jean
+
+Talla:
+12
+
+Precio:
+S/50
+
+Stock disponible:
+12 unidades
+Finalizar la ejecución
+
+Para detener el agente durante una sesión activa:
+
+Ctrl + C
+
+El programa finalizará la ejecución actual.
+
+Resumen del proceso de ejecución
+
+El funcionamiento durante una consulta es:
+
+Usuario realiza una pregunta
+          ↓
+El agente interpreta la consulta
+          ↓
+Decide si necesita consultar el inventario
+          ↓
+La Tool consulta inventario.csv
+          ↓
+Pandas procesa los datos encontrados
+          ↓
+Gemini genera una respuesta en lenguaje natural
+          ↓
+Usuario recibe la información del producto
+
+Con este flujo el agente puede responder preguntas sobre productos utilizando información real almacenada en el archivo inventario.csv.
+
+
+
 
 # ⚙️ Instalación del Proyecto
 
