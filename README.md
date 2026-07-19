@@ -416,5 +416,172 @@ Esta separación de responsabilidades facilita el mantenimiento del código y pe
 
 -------------------------------------------------------
 
+---
+
+# 🔄 Flujo de Funcionamiento del Agente
+
+Uno de los aspectos más importantes de este proyecto es comprender cómo fluye la información desde que el usuario realiza una consulta hasta que recibe una respuesta generada por el agente.
+
+A diferencia de una aplicación tradicional, donde las respuestas suelen estar programadas manualmente, este sistema combina el razonamiento de un Modelo de Lenguaje (LLM) con herramientas capaces de consultar información real del inventario.
+
+El proceso completo puede dividirse en varias etapas.
+
+---
+
+# Paso 1. El usuario realiza una consulta
+
+Todo comienza cuando el usuario escribe una pregunta relacionada con las prendas disponibles.
+
+Por ejemplo:
+
+- ¿Tienen polos negros?
+- ¿Qué talla hay del polo deportivo?
+- ¿Cuánto cuesta la casaca azul?
+- ¿Qué productos tienen stock?
+
+El usuario interactúa con el agente utilizando lenguaje natural, sin necesidad de emplear comandos especiales.
+
+---
+
+# Paso 2. La consulta llega al agente
+
+La pregunta es recibida por el agente creado mediante `create_react_agent()`.
+
+En esta etapa, el agente analiza la intención del usuario para determinar qué información necesita antes de responder.
+
+No todas las consultas requieren acceder al inventario. El agente decide cuándo es necesario utilizar una herramienta y cuándo puede responder directamente.
+
+---
+
+# Paso 3. El modelo razona
+
+Google Gemini interpreta la consulta utilizando el contexto proporcionado por el PromptTemplate.
+
+Durante este proceso el modelo analiza aspectos como:
+
+- Qué está preguntando el usuario.
+- Qué información necesita obtener.
+- Si debe consultar datos externos.
+- Cómo estructurar la respuesta final.
+
+Este razonamiento ocurre antes de generar la respuesta.
+
+---
+
+# Paso 4. Decisión de utilizar una herramienta
+
+Si el agente identifica que necesita información del inventario, activa la herramienta encargada de realizar la consulta.
+
+Este comportamiento corresponde al patrón **ReAct (Reason + Act)**:
+
+1. Razonar.
+2. Decidir.
+3. Ejecutar una acción.
+4. Analizar el resultado.
+5. Responder.
+
+Gracias a este enfoque, el agente no depende únicamente del conocimiento del modelo, sino también de datos reales.
+
+---
+
+# Paso 5. Consulta del inventario
+
+La herramienta utiliza Pandas para leer el archivo `inventario.csv`.
+
+Dependiendo de la consulta realizada, puede buscar información como:
+
+- Productos disponibles.
+- Colores.
+- Tallas.
+- Precios.
+- Stock.
+
+El resultado obtenido se devuelve al agente para que continúe con el proceso.
+
+---
+
+# Paso 6. Interpretación de los datos
+
+Una vez obtenida la información del inventario, el modelo analiza los resultados.
+
+En esta etapa no solo presenta los datos encontrados, sino que también los organiza en una respuesta clara y comprensible para el usuario.
+
+Por ejemplo, si existen varias prendas que cumplen con la búsqueda, el agente puede resumir la información en una respuesta natural.
+
+---
+
+# Paso 7. Generación de la respuesta
+
+Finalmente, Google Gemini redacta la respuesta utilizando tanto el razonamiento del modelo como la información obtenida desde el inventario.
+
+El objetivo es ofrecer respuestas útiles, coherentes y basadas en datos reales.
+
+---
+
+# Diagrama del flujo completo
+
+```text
+Usuario
+   │
+   ▼
+Escribe una consulta
+   │
+   ▼
+PromptTemplate
+   │
+   ▼
+Google Gemini 2.5 Flash
+   │
+   ▼
+create_react_agent()
+   │
+   ▼
+LangGraph controla el flujo
+   │
+   ▼
+¿Necesita consultar datos?
+   │
+   ├──────── No ─────────► Respuesta al usuario
+   │
+   └──────── Sí
+             │
+             ▼
+      Tool de consulta
+             │
+             ▼
+          Pandas
+             │
+             ▼
+      inventario.csv
+             │
+             ▼
+ Información recuperada
+             │
+             ▼
+ Google Gemini interpreta
+             │
+             ▼
+Respuesta final
+             │
+             ▼
+Usuario
+```
+
+---
+
+# Ventajas de este flujo
+
+La arquitectura implementada proporciona varios beneficios:
+
+- El agente responde utilizando información actualizada.
+- Se evita depender exclusivamente del conocimiento del modelo.
+- La lógica del sistema permanece organizada y modular.
+- Es posible incorporar nuevas herramientas sin modificar el flujo principal.
+- La consulta al inventario se realiza únicamente cuando es necesaria, optimizando el funcionamiento del agente.
+
+Este diseño representa una aproximación moderna al desarrollo de agentes inteligentes, combinando razonamiento, acceso a datos y generación de lenguaje natural en un único flujo de trabajo.
+
+-------------------------------------------
+
 
 
