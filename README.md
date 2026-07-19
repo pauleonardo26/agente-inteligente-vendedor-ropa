@@ -1160,6 +1160,332 @@ La siguiente sección muestra cómo ejecutar el proyecto y presenta ejemplos de 
 -------------------------------------------
 
 
+Funcionamiento Interno del Agente
+
+El Agente Inteligente Vendedor de Ropa está construido utilizando una arquitectura basada en agentes de inteligencia artificial.
+
+El sistema combina un modelo de lenguaje (Google Gemini 2.5 Flash), un flujo de ejecución administrado por LangGraph y una herramienta personalizada que permite consultar información almacenada en un archivo CSV.
+
+El objetivo es que el agente pueda interpretar preguntas realizadas en lenguaje natural y obtener información real del inventario antes de generar una respuesta.
+
+---
+
+# Flujo interno del agente
+
+El proceso completo de una consulta funciona de la siguiente manera:
+
+
+Usuario
+|
+↓
+Pregunta en lenguaje natural
+|
+↓
+Agente ReAct
+|
+↓
+LangGraph controla el flujo
+|
+↓
+Decisión: ¿Necesita consultar inventario?
+|
+↓
+Tool de consulta
+|
+↓
+Pandas procesa inventario.csv
+|
+↓
+Información del producto encontrada
+|
+↓
+Google Gemini genera respuesta
+|
+↓
+Respuesta al usuario
+
+
+---
+
+# Arquitectura del agente
+
+El agente está compuesto por los siguientes elementos:
+
+## 1. Modelo de lenguaje (LLM)
+
+El proyecto utiliza:
+
+
+Google Gemini 2.5 Flash
+
+
+El modelo se encarga de:
+
+- Comprender las preguntas del usuario.
+- Interpretar la intención de búsqueda.
+- Procesar la información obtenida desde las herramientas.
+- Generar respuestas en lenguaje natural.
+
+---
+
+# 2. LangGraph
+
+## ¿Qué es LangGraph?
+
+LangGraph es un framework diseñado para construir aplicaciones basadas en agentes mediante estructuras de grafos.
+
+Un grafo permite organizar el flujo de ejecución mediante:
+
+- Estados.
+- Nodos.
+- Transiciones.
+
+En este proyecto LangGraph administra el ciclo de trabajo del agente, permitiendo que cada etapa se ejecute de manera organizada.
+
+---
+
+## Funcionamiento de LangGraph en el proyecto
+
+El flujo puede representarse así:
+
+
+Inicio
+|
+↓
+Recibir pregunta del usuario
+|
+↓
+Procesar con el agente
+|
+↓
+Evaluar necesidad de herramienta
+|
+↓
+Consultar inventario
+|
+↓
+Generar respuesta
+|
+↓
+Finalizar
+
+
+LangGraph permite controlar la interacción entre el modelo Gemini y las herramientas disponibles.
+
+---
+
+# 3. Patrón ReAct
+
+## ¿Qué significa ReAct?
+
+ReAct significa:
+
+
+Reasoning + Acting
+
+
+(Razonamiento + Acción)
+
+Es un patrón utilizado en agentes inteligentes donde el modelo no solamente responde, sino que puede decidir realizar acciones antes de entregar una respuesta.
+
+---
+
+## Funcionamiento de ReAct
+
+Cuando un usuario realiza una consulta, el agente sigue una lógica similar:
+
+
+Pregunta del usuario:
+
+"¿Tienes polos talla 6?"
+
+    ↓
+
+El agente analiza:
+
+Necesito información del inventario.
+
+    ↓
+
+Ejecuta una acción:
+
+Consultar herramienta de inventario.
+
+    ↓
+
+Obtiene resultado:
+
+Polo niño spiderman
+Talla 6
+Stock 15
+
+    ↓
+
+Genera respuesta:
+Producto disponible.
+
+
+---
+
+# 4. create_react_agent()
+
+La función:
+
+```python
+create_react_agent()
+
+es utilizada para crear un agente basado en el patrón ReAct.
+
+Esta función permite conectar:
+
+El modelo de lenguaje Gemini.
+Las herramientas disponibles.
+Las instrucciones del agente.
+El flujo de razonamiento y acción.
+Responsabilidades de create_react_agent()
+
+Dentro del proyecto permite:
+
+Crear el agente inteligente.
+Registrar la herramienta de consulta del inventario.
+Permitir que Gemini decida cuándo utilizar la herramienta.
+Procesar la información obtenida.
+Generar una respuesta final.
+
+El agente no accede directamente al archivo CSV; utiliza la herramienta creada específicamente para consultar la información.
+
+5. PromptTemplate
+¿Qué es PromptTemplate?
+
+PromptTemplate es una herramienta de LangChain que permite crear instrucciones estructuradas para el modelo de inteligencia artificial.
+
+En lugar de enviar preguntas sin contexto, se define un comportamiento específico para el agente.
+
+Función dentro del proyecto
+
+El PromptTemplate establece reglas como:
+
+Actuar como vendedor de ropa.
+Utilizar información disponible en el inventario.
+Responder basándose en datos reales.
+No inventar productos que no existen.
+Entregar información clara al usuario.
+
+Ejemplo conceptual:
+
+Eres un asistente vendedor de ropa.
+
+Tu función es ayudar al usuario
+consultando únicamente el inventario disponible.
+
+Si un producto no existe,
+indica que no está disponible.
+6. Tool de consulta de inventario
+¿Qué es una Tool?
+
+Una Tool es una herramienta que el agente puede utilizar para ejecutar una acción específica.
+
+En este proyecto existe una herramienta encargada de consultar el archivo:
+
+inventario.csv
+Función de la Tool
+
+La herramienta permite:
+
+Buscar productos.
+Filtrar información.
+Obtener precio.
+Consultar talla.
+Revisar stock disponible.
+Flujo de consulta
+Usuario pregunta:
+
+"¿Qué casacas tienes?"
+
+        ↓
+
+Agente decide utilizar Tool
+
+        ↓
+
+Tool consulta inventario.csv
+
+        ↓
+
+Encuentra:
+
+Casaca niño invierno
+Talla 10
+Precio S/75
+Stock 8
+
+        ↓
+
+Gemini genera respuesta
+7. Uso de Pandas para consultar inventario.csv
+¿Qué es Pandas?
+
+Pandas es una librería de Python utilizada para manipular y analizar datos.
+
+En este proyecto permite leer y consultar la información almacenada en el archivo CSV.
+
+Lectura del inventario
+
+Ejemplo:
+
+import pandas as pd
+
+inventario = pd.read_csv("inventario.csv")
+
+El archivo es convertido en una estructura de datos que puede ser procesada mediante Python.
+
+Estructura del inventario
+
+El archivo contiene las siguientes columnas:
+
+Campo	Descripción
+Producto	Nombre del artículo
+Categoría	Tipo de ropa
+Talla	Talla disponible
+Precio	Precio del producto
+Stock	Cantidad disponible
+Ejemplo de búsqueda con datos
+
+Consulta:
+
+Buscar ropa niño talla 8
+
+Pandas analiza el archivo:
+
+Categoría = Ropa niño
+Talla = 8
+
+Resultado:
+
+Producto:
+Conjunto niño deportivo
+
+Precio:
+S/65
+
+Stock:
+10 unidades
+Resumen técnico
+
+El agente funciona mediante la integración de:
+
+Componente	Función
+Gemini 2.5 Flash	Comprensión y generación de respuestas
+LangGraph	Control del flujo del agente
+ReAct	Razonamiento y uso de herramientas
+create_react_agent()	Creación del agente inteligente
+PromptTemplate	Definición del comportamiento
+Tool	Consulta del inventario
+Pandas	Procesamiento del archivo CSV
+
+Esta arquitectura permite crear un agente capaz de responder consultas de productos utilizando datos reales almacenados en el inventario.
+
+
 
 
 
