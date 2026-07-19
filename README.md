@@ -1606,3 +1606,107 @@ Respuesta final
 ```
 
 Esta arquitectura permite construir un agente inteligente capaz de comprender preguntas en lenguaje natural y responder utilizando información real del inventario disponible.
+
+--------------------------------------------------------------
+
+ Autor, Agradecimientos y Licencia
+
+ Autor
+
+Proyecto desarrollado por:
+
+**Paul Leonardo Vilela Chacaltana**
+
+Como parte del **Challenge Oracle Next Education (ONE)**, aplicando conocimientos de inteligencia artificial, agentes inteligentes y automatización.
+
+---
+
+Descripción del desarrollo
+
+Durante la elaboración de este proyecto se utilizaron diferentes herramientas de aprendizaje y apoyo técnico.
+
+El desarrollo del agente, la configuración de tecnologías, las pruebas de funcionamiento y la investigación de conceptos fueron realizados como parte del proceso de aprendizaje del Challenge ONE.
+
+---
+
+ Herramientas de apoyo utilizadas
+
+ ChatGPT como asistente de aprendizaje y documentación
+
+Durante todo el desarrollo del proyecto se utilizó **ChatGPT como herramienta de apoyo** para:
+
+- Comprender conceptos técnicos relacionados con inteligencia artificial.
+- Analizar errores durante la programación.
+- Revisar la estructura del proyecto.
+- Mejorar la documentación técnica.
+- Organizar y redactar el archivo `README.md`.
+- Explicar tecnologías utilizadas como:
+  - LangChain.
+  - LangGraph.
+  - ReAct.
+  - Google Gemini.
+  - Pandas.
+  - Agentes inteligentes.
+
+ChatGPT fue utilizado como un asistente de consulta y aprendizaje, ayudando a comprender los conceptos y mejorar la presentación final del proyecto.
+
+---
+
+ Agradecimientos
+
+Oracle Next Education (ONE)
+
+Agradecimiento especial a **Oracle Next Education (ONE)** por brindar una ruta de aprendizaje enfocada en tecnología, programación e innovación, permitiendo desarrollar soluciones utilizando herramientas actuales de inteligencia artificial.
+
+---
+
+ Tecnologías utilizadas
+
+Agradecimiento a los equipos responsables de crear y mantener las tecnologías utilizadas en este proyecto:
+
+- Google Gemini.
+- LangChain.
+- LangGraph.
+- Pandas.
+- Python.
+- Oracle Cloud Infrastructure.
+
+Estas herramientas permitieron construir y documentar un agente inteligente funcional.
+
+
+
+ Cierre del proyecto
+
+El **Agente Inteligente Vendedor de Ropa** representa la aplicación práctica de conocimientos adquiridos durante el Challenge Oracle Next Education (ONE).
+
+El proyecto integra:
+
+```text
+Python
+   +
+LangChain
+   +
+LangGraph
+   +
+Google Gemini 2.5 Flash
+   +
+Pandas
+```
+
+para crear un agente capaz de interpretar consultas en lenguaje natural y responder utilizando información real almacenada en un inventario.
+
+---
+
+# Reflexión final
+
+Este proyecto representa una primera versión de una solución basada en inteligencia artificial aplicada a un escenario comercial.
+
+El aprendizaje obtenido durante su desarrollo permite establecer una base para futuras mejoras, incorporando nuevas tecnologías y ampliando las capacidades del agente inteligente.
+
+---
+
+⭐ **Gracias por visitar este proyecto.**
+
+
+
+
