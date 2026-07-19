@@ -777,40 +777,93 @@ Esta arquitectura ofrece ventajas como:
 
 -----------------------------------------
 
-# 8. Ejecución del Proyecto
+ Ejecución del Programa
 
 ## Requisitos previos
 
-Antes de ejecutar el Agente Inteligente Vendedor de Ropa es necesario verificar que el entorno tenga instalados los componentes requeridos:
+Antes de ejecutar el **Agente Inteligente Vendedor de Ropa**, es necesario contar con los siguientes requisitos:
 
 - Python 3.10 o superior.
+- Entorno virtual configurado.
 - Dependencias del proyecto instaladas.
-- Variable de entorno con la API Key de Google Gemini configurada.
-- Archivo `inventario.csv` ubicado dentro de la estructura del proyecto.
+- API Key de Google Gemini configurada.
+- Archivo `inventario.csv` disponible dentro de la estructura del proyecto.
 
 ---
 
 ## Activación del entorno virtual
 
-Se recomienda utilizar un entorno virtual para mantener aisladas las dependencias del proyecto.
+Se recomienda utilizar un entorno virtual para mantener organizadas las dependencias del proyecto.
 
 ### Windows
 
 ```bash
 venv\Scripts\activate
+```
 
-Inicio del agente
+### Linux / MacOS
 
-Una vez configurado el entorno, ejecutar el archivo principal del proyecto:
+```bash
+source venv/bin/activate
+```
 
+---
+
+## Instalación de dependencias
+
+Con el entorno virtual activo, ejecutar el siguiente comando:
+
+```bash
+pip install -r requirements.txt
+```
+
+Este comando instala las librerías necesarias para ejecutar el agente:
+
+- LangChain.
+- LangGraph.
+- Google Gemini.
+- Pandas.
+- Librerías complementarias del proyecto.
+
+---
+
+## Configuración de Google Gemini
+
+El proyecto utiliza **Google Gemini 2.5 Flash** como modelo de lenguaje.
+
+Para permitir la comunicación con Gemini es necesario configurar la API Key.
+
+### Windows
+
+```bash
+set GOOGLE_API_KEY="TU_API_KEY"
+```
+
+### Linux / MacOS
+
+```bash
+export GOOGLE_API_KEY="TU_API_KEY"
+```
+
+La API Key permite que el agente pueda enviar consultas al modelo Gemini y recibir respuestas generadas por inteligencia artificial.
+
+---
+
+# Inicio del agente
+
+Después de configurar el entorno, ejecutar el archivo principal del proyecto:
+
+```bash
 python agente_ia_challenge.py
+```
 
-Al iniciar correctamente, el agente queda disponible para recibir consultas relacionadas con el inventario de ropa.
+Si la configuración es correcta, el sistema iniciará el agente inteligente y quedará preparado para recibir consultas sobre el inventario de ropa.
 
-Ejemplo de ejecución
+---
 
-Salida inicial del programa:
+# Ejemplo de ejecución
 
+```text
 =========================================
  Agente Inteligente Vendedor de Ropa
 =========================================
@@ -818,15 +871,23 @@ Salida inicial del programa:
 Sistema iniciado correctamente.
 
 Realiza una consulta sobre los productos disponibles.
-Ejemplos de conversación
-Consulta general de productos
+```
 
-Usuario:
+---
 
+# Ejemplos de conversación
+
+## Consulta general de productos
+
+### Usuario
+
+```text
 ¿Qué productos tienes disponibles?
+```
 
-Agente:
+### Agente
 
+```text
 Tengo disponibles los siguientes productos:
 
 - Polo niño avenger
@@ -846,14 +907,21 @@ Tengo disponibles los siguientes productos:
   Talla: 8
   Precio: S/65
   Stock: 10 unidades
-Consulta por talla
+```
 
-Usuario:
+---
 
+## Consulta por talla
+
+### Usuario
+
+```text
 ¿Tienes ropa para niño talla 10?
+```
 
-Agente:
+### Agente
 
+```text
 Sí, encontré un producto disponible:
 
 Producto:
@@ -870,18 +938,28 @@ S/75
 
 Stock:
 8 unidades
-Consulta de stock
+```
 
-Usuario:
+---
 
-¿Cuántas unidades quedan del pantalón jean niño?
+## Consulta de stock
 
-Agente:
+### Usuario
 
+```text
+¿Cuánto stock queda del pantalón jean niño?
+```
+
+### Agente
+
+```text
 El producto encontrado es:
 
 Producto:
 Pantalón niño jean
+
+Categoría:
+Ropa niño
 
 Talla:
 12
@@ -891,132 +969,333 @@ S/50
 
 Stock disponible:
 12 unidades
-Finalizar la ejecución
+```
 
-Para detener el agente durante una sesión activa:
+---
 
+# Finalizar la ejecución
+
+Para detener la ejecución del agente durante una sesión activa:
+
+```bash
 Ctrl + C
+```
 
-El programa finalizará la ejecución actual.
-
-Resumen del proceso de ejecución
-
-El funcionamiento durante una consulta es:
-
-Usuario realiza una pregunta
-          ↓
-El agente interpreta la consulta
-          ↓
-Decide si necesita consultar el inventario
-          ↓
-La Tool consulta inventario.csv
-          ↓
-Pandas procesa los datos encontrados
-          ↓
-Gemini genera una respuesta en lenguaje natural
-          ↓
-Usuario recibe la información del producto
-
-Con este flujo el agente puede responder preguntas sobre productos utilizando información real almacenada en el archivo inventario.csv.
-
-
-
-
-# ⚙️ Instalación del Proyecto
-
-Esta sección explica cómo preparar el entorno de desarrollo para ejecutar el **Agente Inteligente Vendedor de Ropa**.
-
-El proyecto fue desarrollado utilizando **Python**, **Google Colab** y las bibliotecas LangChain, LangGraph, Google Gemini y Pandas.
-
-## Requisitos previos
-
-Antes de ejecutar el proyecto es necesario contar con los siguientes requisitos:
-
-- Python 3.10 o superior.
-- Una cuenta de Google con acceso a Google AI Studio.
-- Una API Key de Google Gemini.
-- Git (opcional, para clonar el repositorio).
-- Conexión a Internet para acceder al modelo de lenguaje.
+El programa finalizará la sesión actual.
 
 ---
 
-# Clonar el repositorio
+# Flujo de ejecución del agente
 
-Si deseas descargar el proyecto desde GitHub, ejecuta el siguiente comando:
-
-
-https://github.com/pauleonardo26/agente-inteligente-vendedor-ropa/edit/main/README.md
-
-Luego ingresa a la carpeta del proyecto:
-
-agente-inteligente-vendedor-ropa
-
-
-
-
-# Bibliotecas utilizadas
-
-Las principales dependencias del proyecto son:
-
-| Biblioteca | Función dentro del proyecto |
-|------------|-----------------------------|
-| Python | Lenguaje principal del proyecto |
-| LangChain | Construcción del agente inteligente |
-| LangGraph | Control del flujo del agente |
-| Google Generative AI | Conexión con Gemini |
-| LangChain Google GenAI | Integración entre LangChain y Gemini |
-| Pandas | Lectura y consulta del inventario CSV |
-
----
-
-# Archivo del inventario
-
-El proyecto utiliza un archivo denominado:
+El proceso completo de una consulta funciona de la siguiente manera:
 
 ```text
+Usuario realiza una pregunta
+          |
+          ↓
+El agente interpreta la consulta
+          |
+          ↓
+Evalúa si necesita consultar información
+          |
+          ↓
+Ejecuta la Tool de consulta
+          |
+          ↓
+Pandas procesa el archivo inventario.csv
+          |
+          ↓
+Obtiene la información del producto
+          |
+          ↓
+Gemini genera una respuesta en lenguaje natural
+          |
+          ↓
+Usuario recibe la respuesta
+```
+
+---
+
+# Resumen
+
+La ejecución del proyecto permite interactuar con un agente inteligente capaz de responder preguntas sobre productos de ropa utilizando información real almacenada en el archivo:
+
+```
 inventario.csv
 ```
 
-Este archivo contiene la información que el agente consulta para responder preguntas relacionadas con los productos.
+El agente combina:
 
-Debe permanecer en la carpeta principal del proyecto (o en la ruta definida dentro del código) para que el agente pueda acceder correctamente a los datos.
+- Google Gemini 2.5 Flash para la generación de respuestas.
+- LangChain para la construcción del agente.
+- LangGraph para administrar el flujo.
+- Pandas para consultar los datos del inventario.
 
----
+De esta manera, el sistema puede interpretar consultas en lenguaje natural y entregar información del inventario de forma automática.
 
-# Verificación de la instalación
+--------------------------------------------------------------------------
 
-Antes de ejecutar el agente, verifica que:
 
-- Python esté correctamente instalado.
-- Todas las bibliotecas se hayan instalado sin errores.
-- El archivo `inventario.csv` esté disponible.
-- La API Key de Google Gemini esté configurada.
-- Exista conexión a Internet.
 
-Si todos estos requisitos se cumplen, el proyecto estará listo para ejecutarse.
 
----
 
-# Entorno utilizado durante el desarrollo
 
-Este Challenge fue desarrollado principalmente utilizando **Google Colab**, lo que permitió ejecutar el proyecto directamente desde el navegador sin necesidad de instalar un entorno de desarrollo local.
 
-Google Colab facilitó:
 
-- La instalación de bibliotecas mediante `pip`.
-- La ejecución interactiva del código.
-- La organización del proyecto en celdas.
-- La integración con Google Gemini mediante una API Key.
 
-Gracias a este entorno, fue posible desarrollar y probar el agente de forma rápida y sencilla.
 
----
 
-# Preparación del entorno
 
-Una vez completados todos los pasos anteriores, el proyecto queda listo para configurar la conexión con Google Gemini y ejecutar el agente inteligente.
 
-En la siguiente sección se explica cómo obtener y configurar la API Key necesaria para establecer la comunicación con el modelo de lenguaje.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ------------------------------------------
 
@@ -1483,12 +1762,193 @@ PromptTemplate	Definición del comportamiento
 Tool	Consulta del inventario
 Pandas	Procesamiento del archivo CSV
 
-Esta arquitectura permite crear un agente capaz de responder consultas de productos utilizando datos reales almacenados en el inventario.
-
-
-
-
-
+Esta arquitectura permite crear un agente capaz de responder consultas de productos utilizando datos reales almacenados en
+el inventario.
 
 --------------------------------------------------------
+
+El proyecto actual implementa un Agente Inteligente Vendedor de Ropa capaz de consultar un inventario almacenado en un archivo CSV y responder preguntas utilizando Google Gemini.
+
+Las siguientes propuestas representan posibles evoluciones del proyecto. Estas funcionalidades **no están implementadas actualmente** y forman parte de una línea de mejora futura.
+
+---
+
+# Funcionalidades actuales
+
+Actualmente el agente cuenta con:
+
+✅ Consulta de productos mediante `inventario.csv`.
+
+✅ Procesamiento de información utilizando Pandas.
+
+✅ Respuestas generadas mediante Google Gemini 2.5 Flash.
+
+✅ Uso de un agente basado en ReAct.
+
+✅ Flujo de ejecución administrado con LangGraph.
+
+✅ Búsqueda de información como:
+
+- Producto.
+- Categoría.
+- Talla.
+- Precio.
+- Stock disponible.
+
+---
+
+# Mejoras propuestas
+
+## 11.1 Integración con WhatsApp
+
+Una posible evolución sería conectar el agente con WhatsApp para permitir una atención automática a clientes desde una plataforma de mensajería.
+
+Posibles funcionalidades:
+
+- Responder consultas automáticamente.
+- Atender preguntas frecuentes.
+- Mostrar disponibilidad de productos.
+- Facilitar la comunicación con clientes.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# 11.2 Catálogo visual con imágenes
+
+Actualmente el agente trabaja con información textual del inventario.
+
+Una mejora futura sería incorporar un catálogo visual donde cada producto pueda incluir:
+
+- Fotografías.
+- Colores disponibles.
+- Diseños.
+- Características adicionales.
+
+Esto permitiría una experiencia más cercana a una tienda virtual.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# 11.3 Implementación de base de datos
+
+Actualmente la información del inventario se encuentra almacenada en un archivo:
+
+
+inventario.csv
+
+
+Una evolución del proyecto sería migrar la información hacia una base de datos.
+
+Posibles beneficios:
+
+- Mayor cantidad de productos.
+- Consultas más eficientes.
+- Actualización dinámica del inventario.
+- Mejor organización de información.
+
+Ejemplos de bases de datos posibles:
+
+- PostgreSQL.
+- MySQL.
+- Oracle Database.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# 11.4 Gestión de clientes
+
+Una futura versión podría incorporar un sistema para administrar información de clientes.
+
+Posibles funcionalidades:
+
+- Registro de clientes.
+- Historial de consultas.
+- Preferencias de compra.
+- Seguimiento de pedidos.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# 11.5 Automatización del proceso de ventas
+
+El agente podría evolucionar hacia un asistente comercial más completo.
+
+Posibles mejoras:
+
+- Seguimiento de clientes interesados.
+- Generación automática de cotizaciones.
+- Recordatorios de compra.
+- Automatización de respuestas comerciales.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# 11.6 Mejoras del agente de inteligencia artificial
+
+El comportamiento del agente podría ampliarse incorporando nuevas capacidades.
+
+Posibles mejoras:
+
+- Mejor comprensión del contexto de conversación.
+- Memoria de conversaciones anteriores.
+- Mayor precisión en búsquedas.
+- Respuestas más personalizadas.
+- Integración con más fuentes de información.
+
+**Estado actual:**
+
+❌ No implementado.
+
+---
+
+# Roadmap de evolución
+
+La evolución del proyecto podría seguir las siguientes etapas:
+
+
+Versión actual
+|
+↓
+Agente conectado a inventario CSV
+|
+↓
+Integración con base de datos
+|
+↓
+Catálogo visual de productos
+|
+↓
+Integración con canales de atención
+|
+↓
+Automatización completa de ventas
+
+
+---
+
+# Conclusión
+
+El proyecto actual demuestra cómo un agente inteligente puede utilizar modelos generativos de IA para consultar información estructurada y responder preguntas de usuarios.
+
+Las mejoras futuras permitirían transformar este prototipo en una solución más completa orientada a la gestión comercial y atención automatizada de clientes.
+
+
+
+
+
 
