@@ -107,4 +107,163 @@ Usuario
 
 ✔ Proyecto desarrollado completamente en Python.
 
-✔ Código organizado para facilitar futuras ampliaciones.
+------------------------------------------------
+
+---
+
+# 🏗️ Arquitectura del Proyecto
+
+Este proyecto implementa un **Agente Inteligente Vendedor de Ropa** utilizando una arquitectura basada en agentes (Agentic AI). En lugar de responder únicamente con texto generado por un modelo de lenguaje, el agente es capaz de decidir cuándo necesita consultar información externa para construir una respuesta más precisa.
+
+La solución integra un modelo de lenguaje de Google Gemini con LangChain y LangGraph, utilizando herramientas (Tools) que permiten acceder al inventario de productos almacenado en un archivo CSV.
+
+La arquitectura fue diseñada para ser modular, facilitando futuras ampliaciones sin modificar el funcionamiento principal del agente.
+
+## Arquitectura general
+
+```text
+                        Usuario
+                           │
+                           ▼
+              Consulta sobre una prenda
+                           │
+                           ▼
+          Google Gemini 2.5 Flash (LLM)
+                           │
+                           ▼
+         create_react_agent() - LangChain
+                           │
+                           ▼
+            LangGraph (Control del flujo)
+                           │
+          ┌────────────────┴────────────────┐
+          │                                 │
+          ▼                                 ▼
+ Analiza la consulta              Decide si usar una Tool
+                                            │
+                                            ▼
+                          Consultar Inventario
+                                 (Tool)
+                                            │
+                                            ▼
+                               Pandas
+                                            │
+                                            ▼
+                               inventario.csv
+                                            │
+                                            ▼
+                          Información encontrada
+                                            │
+                                            ▼
+                     Respuesta generada por Gemini
+                                            │
+                                            ▼
+                                  Usuario
+```
+
+## Componentes principales
+
+### Usuario
+
+Es quien interactúa con el sistema realizando preguntas relacionadas con los productos disponibles, por ejemplo:
+
+- ¿Tienen polos negros?
+- ¿Qué talla hay disponible?
+- ¿Cuánto cuesta este producto?
+- ¿Qué prendas tienen en stock?
+
+El usuario no necesita conocer cómo funciona internamente el sistema; simplemente conversa con el agente de manera natural.
+
+---
+
+### Modelo de Lenguaje (Google Gemini 2.5 Flash)
+
+Google Gemini es el responsable de comprender la intención del usuario, interpretar la consulta y redactar una respuesta clara y natural.
+
+Sin embargo, el modelo no inventa la información del inventario. Cuando necesita datos reales, utiliza una herramienta para consultarlos antes de responder.
+
+---
+
+### LangChain
+
+LangChain actúa como la capa de integración entre el modelo de lenguaje y las herramientas disponibles.
+
+Permite definir el comportamiento del agente, registrar herramientas, construir prompts y gestionar la comunicación con el modelo de IA.
+
+---
+
+### create_react_agent()
+
+El agente fue construido utilizando la función `create_react_agent()`.
+
+Esta implementación sigue el patrón **ReAct (Reason + Act)**, donde el modelo:
+
+1. Analiza la pregunta.
+2. Decide si necesita consultar información.
+3. Ejecuta la herramienta correspondiente.
+4. Analiza el resultado obtenido.
+5. Genera la respuesta final para el usuario.
+
+Este enfoque permite respuestas más precisas y fundamentadas en datos reales.
+
+---
+
+### LangGraph
+
+LangGraph coordina el flujo completo del agente.
+
+Su función principal es organizar las distintas etapas del proceso, controlar la ejecución de herramientas y mantener un flujo estructurado entre el razonamiento del modelo y las acciones realizadas.
+
+Gracias a esta arquitectura, el proyecto puede crecer fácilmente incorporando nuevas herramientas o funcionalidades.
+
+---
+
+### Tool: Consulta del Inventario
+
+El agente dispone de una herramienta especializada cuya responsabilidad es consultar el inventario de productos.
+
+Cuando el modelo detecta que necesita información sobre disponibilidad, tallas, colores, precios o stock, activa esta herramienta para obtener los datos directamente desde el archivo CSV.
+
+De esta manera, las respuestas se basan en información actualizada y no en conocimiento generado por el modelo.
+
+---
+
+### Pandas
+
+Pandas se utiliza para cargar y procesar el archivo `inventario.csv`.
+
+Esta biblioteca facilita la lectura, búsqueda y filtrado de datos, permitiendo localizar rápidamente los productos que cumplen con los criterios solicitados por el usuario.
+
+---
+
+### Archivo inventario.csv
+
+El archivo `inventario.csv` constituye la fuente de datos del proyecto.
+
+En él se almacena el catálogo de prendas disponibles con información como:
+
+- Nombre del producto
+- Categoría
+- Talla
+- Color
+- Precio
+- Stock disponible
+
+El agente consulta este archivo cada vez que necesita responder preguntas relacionadas con el inventario.
+
+---
+
+## Beneficios de esta arquitectura
+
+Esta arquitectura ofrece diversas ventajas:
+
+- Separación entre el razonamiento y el acceso a los datos.
+- Respuestas basadas en información real del inventario.
+- Código modular y fácil de mantener.
+- Facilidad para incorporar nuevas herramientas.
+- Escalabilidad para futuras integraciones.
+- Organización clara del flujo de ejecución mediante LangGraph.
+- Uso de tecnologías modernas de Inteligencia Artificial Generativa.
+
+
+
