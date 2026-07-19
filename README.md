@@ -778,4 +778,112 @@ Esta arquitectura ofrece ventajas como:
 
 -----------------------------------------
 
+---
+
+# ⚙️ Instalación del Proyecto
+
+Esta sección explica cómo preparar el entorno de desarrollo para ejecutar el **Agente Inteligente Vendedor de Ropa**.
+
+El proyecto fue desarrollado utilizando **Python**, **Google Colab** y las bibliotecas LangChain, LangGraph, Google Gemini y Pandas.
+
+## Requisitos previos
+
+Antes de ejecutar el proyecto es necesario contar con los siguientes requisitos:
+
+- Python 3.10 o superior.
+- Una cuenta de Google con acceso a Google AI Studio.
+- Una API Key de Google Gemini.
+- Git (opcional, para clonar el repositorio).
+- Conexión a Internet para acceder al modelo de lenguaje.
+
+---
+
+# Clonar el repositorio
+
+Si deseas descargar el proyecto desde GitHub, ejecuta el siguiente comando:
+
+
+https://github.com/pauleonardo26/agente-inteligente-vendedor-ropa/edit/main/README.md
+
+Luego ingresa a la carpeta del proyecto:
+
+agente-inteligente-vendedor-ropa
+
+
+
+
+# Bibliotecas utilizadas
+
+Las principales dependencias del proyecto son:
+
+| Biblioteca | Función dentro del proyecto |
+|------------|-----------------------------|
+| Python | Lenguaje principal del proyecto |
+| LangChain | Construcción del agente inteligente |
+| LangGraph | Control del flujo del agente |
+| Google Generative AI | Conexión con Gemini |
+| LangChain Google GenAI | Integración entre LangChain y Gemini |
+| Pandas | Lectura y consulta del inventario CSV |
+
+---
+
+# Archivo del inventario
+
+El proyecto utiliza un archivo denominado:
+
+```text
+inventario.csv
+```
+
+Este archivo contiene la información que el agente consulta para responder preguntas relacionadas con los productos.
+
+Debe permanecer en la carpeta principal del proyecto (o en la ruta definida dentro del código) para que el agente pueda acceder correctamente a los datos.
+
+---
+
+# Verificación de la instalación
+
+Antes de ejecutar el agente, verifica que:
+
+- Python esté correctamente instalado.
+- Todas las bibliotecas se hayan instalado sin errores.
+- El archivo `inventario.csv` esté disponible.
+- La API Key de Google Gemini esté configurada.
+- Exista conexión a Internet.
+
+Si todos estos requisitos se cumplen, el proyecto estará listo para ejecutarse.
+
+---
+
+# Entorno utilizado durante el desarrollo
+
+Este Challenge fue desarrollado principalmente utilizando **Google Colab**, lo que permitió ejecutar el proyecto directamente desde el navegador sin necesidad de instalar un entorno de desarrollo local.
+
+Google Colab facilitó:
+
+- La instalación de bibliotecas mediante `pip`.
+- La ejecución interactiva del código.
+- La organización del proyecto en celdas.
+- La integración con Google Gemini mediante una API Key.
+
+Gracias a este entorno, fue posible desarrollar y probar el agente de forma rápida y sencilla.
+
+---
+
+# Preparación del entorno
+
+Una vez completados todos los pasos anteriores, el proyecto queda listo para configurar la conexión con Google Gemini y ejecutar el agente inteligente.
+
+En la siguiente sección se explica cómo obtener y configurar la API Key necesaria para establecer la comunicación con el modelo de lenguaje.
+
+------------------------------------------
+
+
+
+
+
+
+
+
+--------------------------------------------------------
 
