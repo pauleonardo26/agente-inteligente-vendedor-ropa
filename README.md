@@ -265,5 +265,156 @@ Esta arquitectura ofrece diversas ventajas:
 - Organización clara del flujo de ejecución mediante LangGraph.
 - Uso de tecnologías modernas de Inteligencia Artificial Generativa.
 
+- ----------------------------------------
+
+---
+
+# 📁 Estructura del Proyecto
+
+Una buena organización de archivos facilita el mantenimiento del código, mejora la legibilidad y permite que otros desarrolladores comprendan rápidamente el funcionamiento del proyecto.
+
+La estructura utilizada en este Challenge es la siguiente:
+
+```text
+Agente-Inteligente-Vendedor-de-Ropa/
+│
+├── inventario.csv
+├── main.py
+├── requirements.txt
+├── README.md
+│
+└── (archivos auxiliares del proyecto)
+```
+
+> **Nota:** La estructura puede ampliarse en futuras versiones incorporando nuevos módulos, herramientas o carpetas específicas sin afectar el funcionamiento principal del agente.
+
+---
+
+# Descripción de los archivos
+
+## 📄 main.py
+
+Es el archivo principal del proyecto.
+
+Desde este archivo se inicia la aplicación y se configura el funcionamiento general del agente inteligente.
+
+Entre sus responsabilidades se encuentran:
+
+- Inicializar el modelo Google Gemini.
+- Configurar LangChain.
+- Crear el agente mediante `create_react_agent()`.
+- Registrar las herramientas disponibles.
+- Ejecutar el flujo controlado por LangGraph.
+- Recibir las consultas del usuario.
+- Mostrar las respuestas generadas.
+
+En otras palabras, **main.py** es el punto de entrada de toda la aplicación.
+
+---
+
+## 📊 inventario.csv
+
+Este archivo almacena el inventario de prendas de vestir que el agente utiliza como fuente de información.
+
+Cada fila representa un producto disponible y cada columna contiene una característica relevante, como:
+
+- Nombre del producto.
+- Categoría.
+- Talla.
+- Color.
+- Precio.
+- Stock disponible.
+
+Gracias a este enfoque, la información puede actualizarse modificando únicamente el archivo CSV, sin necesidad de cambiar el código del agente.
+
+---
+
+## 📦 requirements.txt
+
+Este archivo reúne todas las dependencias necesarias para ejecutar el proyecto.
+
+Permite instalar fácilmente las bibliotecas utilizadas mediante un único comando, garantizando que otros desarrolladores puedan reproducir el mismo entorno de trabajo.
+
+Entre las principales dependencias se incluyen:
+
+- Python
+- LangChain
+- LangGraph
+- Pandas
+- Google Generative AI
+
+---
+
+## 📘 README.md
+
+Este documento describe el proyecto de forma completa.
+
+Incluye información sobre:
+
+- Objetivos.
+- Arquitectura.
+- Tecnologías utilizadas.
+- Instalación.
+- Configuración.
+- Ejecución.
+- Ejemplos de uso.
+- Mejoras futuras.
+- Licencia.
+
+Su finalidad es servir como guía para cualquier persona interesada en comprender, ejecutar o colaborar con el proyecto.
+
+---
+
+# Organización lógica del sistema
+
+Aunque el proyecto es compacto, internamente puede entenderse como la interacción de varios componentes especializados:
+
+```text
+Usuario
+   │
+   ▼
+main.py
+   │
+   ▼
+Agente Inteligente
+   │
+   ├──────────────► Modelo Gemini
+   │
+   ├──────────────► PromptTemplate
+   │
+   ├──────────────► create_react_agent()
+   │
+   ├──────────────► LangGraph
+   │
+   └──────────────► Tool
+                      │
+                      ▼
+                  Pandas
+                      │
+                      ▼
+               inventario.csv
+```
+
+Cada componente cumple una función específica dentro del flujo del agente, favoreciendo una arquitectura clara, organizada y preparada para futuras ampliaciones.
+
+---
+
+# Diseño modular
+
+Uno de los principios aplicados en este proyecto es la modularidad.
+
+Cada tecnología cumple un propósito bien definido:
+
+- **Gemini** interpreta y genera respuestas.
+- **LangChain** conecta el modelo con las herramientas.
+- **LangGraph** coordina el flujo de ejecución.
+- **PromptTemplate** organiza las instrucciones enviadas al modelo.
+- **Pandas** procesa el inventario.
+- **inventario.csv** almacena la información de los productos.
+
+Esta separación de responsabilidades facilita el mantenimiento del código y permite incorporar nuevas funcionalidades sin alterar la lógica principal del agente.
+
+-------------------------------------------------------
+
 
 
