@@ -583,5 +583,199 @@ Este diseño representa una aproximación moderna al desarrollo de agentes intel
 
 -------------------------------------------
 
+---
+
+# 🛠️ Tecnologías Utilizadas
+
+El desarrollo de este proyecto combina diferentes tecnologías y bibliotecas orientadas a la construcción de aplicaciones basadas en Inteligencia Artificial Generativa.
+
+Cada una cumple una función específica dentro de la arquitectura del agente.
+
+---
+
+# Python
+
+**Python** es el lenguaje de programación utilizado para desarrollar todo el proyecto.
+
+Fue elegido por su sintaxis sencilla, su amplia comunidad y la gran cantidad de bibliotecas disponibles para ciencia de datos e Inteligencia Artificial.
+
+En este proyecto Python se utiliza para:
+
+- Construir el agente inteligente.
+- Procesar la información del inventario.
+- Integrar todas las bibliotecas utilizadas.
+- Ejecutar el flujo completo de la aplicación.
+
+---
+
+# LangChain
+
+LangChain es el framework que permite desarrollar aplicaciones basadas en Modelos de Lenguaje (LLM).
+
+Su función principal consiste en conectar el modelo de IA con herramientas externas y organizar la interacción entre ambos.
+
+Dentro del proyecto, LangChain permite:
+
+- Integrar Google Gemini.
+- Crear el agente inteligente.
+- Registrar herramientas (Tools).
+- Gestionar la comunicación entre el modelo y las funciones del programa.
+- Facilitar una arquitectura modular y extensible.
+
+---
+
+# LangGraph
+
+LangGraph complementa a LangChain proporcionando una forma estructurada de controlar el flujo de ejecución del agente.
+
+En lugar de ejecutar todas las acciones de manera lineal, LangGraph organiza el proceso en diferentes etapas, permitiendo decidir qué acción ejecutar en cada momento.
+
+En este proyecto LangGraph se utiliza para:
+
+- Coordinar el flujo del agente.
+- Controlar el uso de herramientas.
+- Gestionar el razonamiento antes y después de consultar el inventario.
+- Mantener una arquitectura preparada para futuras ampliaciones.
+
+---
+
+# Google Gemini 2.5 Flash
+
+Google Gemini 2.5 Flash es el Modelo de Lenguaje (LLM) utilizado por el agente.
+
+Es el encargado de comprender las preguntas realizadas por el usuario y generar respuestas en lenguaje natural.
+
+Su función dentro del proyecto incluye:
+
+- Interpretar consultas.
+- Analizar la intención del usuario.
+- Decidir cuándo utilizar una herramienta.
+- Generar respuestas claras y coherentes.
+- Integrar la información recuperada desde el inventario.
+
+El modelo no almacena el inventario dentro de su conocimiento; únicamente utiliza la información obtenida mediante las herramientas disponibles.
+
+---
+
+# Pandas
+
+Pandas es la biblioteca utilizada para manipular y consultar datos estructurados.
+
+En este proyecto permite cargar el archivo `inventario.csv` y realizar búsquedas de forma eficiente.
+
+Entre sus funciones destacan:
+
+- Leer archivos CSV.
+- Filtrar productos.
+- Consultar precios.
+- Buscar tallas disponibles.
+- Verificar el stock.
+- Organizar la información antes de enviarla al agente.
+
+---
+
+# PromptTemplate
+
+PromptTemplate permite definir la estructura de las instrucciones enviadas al modelo de lenguaje.
+
+Gracias a esta herramienta, el agente recibe un contexto organizado que mejora la calidad de las respuestas.
+
+En este proyecto se utiliza para:
+
+- Definir el comportamiento del agente.
+- Establecer el contexto de la conversación.
+- Guiar la interpretación de las consultas.
+- Mantener consistencia en las respuestas generadas.
+
+---
+
+# create_react_agent()
+
+La función `create_react_agent()` se utiliza para construir el agente inteligente siguiendo el patrón **ReAct (Reason + Act)**.
+
+Este patrón permite que el modelo:
+
+1. Analice la consulta.
+2. Razone sobre la información necesaria.
+3. Decida si debe utilizar una herramienta.
+4. Ejecute la herramienta correspondiente.
+5. Interprete el resultado.
+6. Genere la respuesta final.
+
+Gracias a este enfoque, el agente puede combinar razonamiento e información real del inventario.
+
+---
+
+# inventario.csv
+
+El archivo `inventario.csv` constituye la base de conocimiento del proyecto.
+
+Contiene la información de los productos disponibles y es consultado dinámicamente por el agente.
+
+Entre los datos almacenados se encuentran:
+
+- Producto.
+- Categoría.
+- Talla.
+- Color.
+- Precio.
+- Stock.
+
+Al mantener la información separada del código, es posible actualizar el inventario simplemente modificando el archivo CSV.
+
+---
+
+# Integración entre tecnologías
+
+Todas las tecnologías trabajan de forma coordinada para ofrecer una experiencia de consulta inteligente.
+
+El flujo de integración puede representarse de la siguiente manera:
+
+```text
+Python
+   │
+   ▼
+LangChain
+   │
+   ▼
+create_react_agent()
+   │
+   ▼
+LangGraph
+   │
+   ▼
+Google Gemini
+   │
+   ▼
+Tool de consulta
+   │
+   ▼
+Pandas
+   │
+   ▼
+inventario.csv
+   │
+   ▼
+Respuesta al usuario
+```
+
+Cada componente aporta una capacidad específica y, en conjunto, permiten construir un agente capaz de comprender preguntas, consultar información real y responder de manera natural.
+
+---
+
+# ¿Por qué esta combinación de tecnologías?
+
+La elección de estas herramientas responde a la necesidad de construir un agente moderno, modular y escalable.
+
+Esta arquitectura ofrece ventajas como:
+
+- Separación clara de responsabilidades.
+- Fácil mantenimiento del código.
+- Integración con modelos de lenguaje de última generación.
+- Consulta dinámica de información externa.
+- Posibilidad de incorporar nuevas herramientas y fuentes de datos en futuras versiones.
+- Base sólida para evolucionar hacia aplicaciones más completas, como asistentes de ventas con interfaces web o integraciones con plataformas de mensajería.
+
+-----------------------------------------
 
 
