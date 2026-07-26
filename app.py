@@ -35,6 +35,9 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
+df = pd.read_csv("inventario.csv")
+
+
 @tool
 def consultar_inventario(pregunta: str) -> str:
     """
