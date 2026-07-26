@@ -11,6 +11,10 @@
 
 ---
 
+Aplicación desplegada en Streamlit:
+
+https://agente-inteligente-vendedor-ropa-dz5dz2e78lc6z8r6ev5bto.streamlit.app/
+
 # Descripción
 
 Este proyecto corresponde al **Challenge Oracle Next Education (ONE)** y consiste en el desarrollo de un **Agente Inteligente Vendedor de Ropa**, construido con tecnologías modernas de Inteligencia Artificial.
