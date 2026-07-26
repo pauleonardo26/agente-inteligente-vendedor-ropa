@@ -97,24 +97,24 @@ if st.button("Consultar"):
 
         with st.spinner("Consultando inventario..."):
 
-            respuesta = agent.invoke(
-                {
-                    "messages": [
-                        (
-                            "user",
-                            prompt.format(input=pregunta)
-                        )
-                    ]
-                }
+        
+
+respuesta = agent.invoke(
+    {
+        "messages": [
+            (
+                "user",
+                prompt.format(input=pregunta)
             )
+        ]
+    }
+)
 
-            mensaje = respuesta["messages"][-1].content
+mensaje_final = respuesta["messages"][-1].content
 
-        st.success("Respuesta")
+st.success("Respuesta del agente")
 
-        st.write(mensaje)
-
-
+st.write(mensaje_final)
 
 with st.expander("Ver inventario"):
 
