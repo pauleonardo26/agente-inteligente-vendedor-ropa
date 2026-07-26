@@ -44,16 +44,18 @@ def consultar_inventario(pregunta: str) -> str:
     return df.to_string(index=False)
 
 
-herramienta_inventario = Tool(
-    name="Inventario",
-    func=consultar_inventario,
-    description="""
-    Utiliza esta herramienta para consultar el inventario de ropa.
-    Contiene productos, categorías, tallas, precios y stock.
+    
+
+from langchain_core.tools import tool
+
+@tool
+def consultar_inventario(pregunta: str) -> str:
     """
-)
-
-
+    Consulta el inventario de ropa disponible.
+    Contiene productos, categorias, tallas, precios y stock.
+    """
+    return df.to_string(index=False)
+    
 
 prompt = PromptTemplate.from_template("""
 Eres un asistente especializado en ventas de ropa.
