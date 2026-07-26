@@ -8,6 +8,7 @@
 ![Gemini](https://img.shields.io/badge/Google-Gemini%202.5%20Flash-red)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-purple)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
 ---
 
