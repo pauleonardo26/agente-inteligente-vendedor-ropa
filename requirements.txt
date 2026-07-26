@@ -1,5 +1,6 @@
-langchain
-langgraph
-pandas
-google-generativeai
+streamlit
+langchain==1.3.27
+langgraph==1.2.1
 langchain-google-genai
+google-generativeai
+pandas
