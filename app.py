@@ -93,28 +93,34 @@ if st.button("Consultar"):
 
     if pregunta.strip() == "":
         st.warning("Ingrese una pregunta.")
+
     else:
 
         with st.spinner("Consultando inventario..."):
 
-        
-
-respuesta = agent.invoke(
-    {
-        "messages": [
-            (
-                "user",
-                prompt.format(input=pregunta)
+            respuesta = agent.invoke(
+                {
+                    "messages": [
+                        (
+                            "user",
+                            prompt.format(input=pregunta)
+                        )
+                    ]
+                }
             )
-        ]
-    }
-)
 
-mensaje_final = respuesta["messages"][-1].content
+            contenido = respuesta["messages"][-1].content
 
-st.success("Respuesta del agente")
+            if isinstance(contenido, list):
+                mensaje_final = contenido[0]["text"]
+            else:
+                mensaje_final = contenido
 
-st.write(mensaje_final)
+        st.success("Respuesta del agente")
+        st.write(mensaje_final)
+
+
+
 
 with st.expander("Ver inventario"):
 
