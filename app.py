@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-from langchain.tools import Tool
+
+from langchain_core.tools import tool
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.prebuilt import create_react_agent
