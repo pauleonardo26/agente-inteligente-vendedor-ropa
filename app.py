@@ -35,17 +35,14 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
-
-df = pd.read_csv("inventario.csv")
-
-
-
+@tool
 def consultar_inventario(pregunta: str) -> str:
     """
-    Devuelve el contenido completo del inventario para que el modelo
-    responda únicamente utilizando esa información.
+    Consulta el inventario de ropa disponible.
+    Contiene productos, categorias, tallas, precios y stock.
     """
     return df.to_string(index=False)
+
 
 herramienta_inventario = Tool(
     name="Inventario",
@@ -76,9 +73,8 @@ Pregunta del usuario:
 
 agent = create_react_agent(
     llm,
-    tools=[herramienta_inventario]
+    tools=[consultar_inventario]
 )
-
 
 
 st.subheader("Realiza una consulta")
